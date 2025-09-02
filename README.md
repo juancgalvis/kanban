@@ -314,6 +314,10 @@ Acceder a [web](http://localhost:4200)
 
 Ejecutamos la tarea para generar el Driven Adapter
 
+```bash
+gradle gda --type r2dbc
+```
+
 Creamos la clase que servirá de DTO
 
 ```java
