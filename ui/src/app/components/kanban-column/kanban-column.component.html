@@ -1,0 +1,39 @@
+<div class="column" [ngClass]="status">
+  <div class="column-header">
+    <h3>{{ title }}</h3>
+    <ng-content select="[column-actions]"></ng-content>
+  </div>
+  <div
+    cdkDropList
+    [id]="status"
+    [cdkDropListData]="tasks"
+    [cdkDropListConnectedTo]="connectedTo"
+    (cdkDropListDropped)="dropped.emit($event)"
+    class="list"
+  >
+    @for (task of tasks; track task.id) {
+    <mat-card cdkDrag [cdkDragData]="task" class="task-card">
+      <mat-card-title>{{ task.title }}</mat-card-title>
+      <mat-card-content>
+        <div class="desc">{{ task.description }}</div>
+        <div class="meta">
+          @if (task.createdAt) {
+            <span>Creada: {{ task.createdAt | date:'short' }}</span>
+          }
+          @if (task.updatedAt) {
+            <span> • Actualizada: {{ task.updatedAt | date:'short' }}</span>
+          }
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-icon-button color="primary" aria-label="editar" (click)="edit.emit(task)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" aria-label="eliminar" (click)="remove.emit(task)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    }
+  </div>
+</div>

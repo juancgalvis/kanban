@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Kanban API
+  version: 1.0.0
+  description: API básica para gestionar tareas en un tablero Kanban.
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /tasks:
+    get:
+      summary: Listar todas las tareas
+      responses:
+        '200':
+          description: Lista de tareas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    post:
+      summary: Crear una nueva tarea
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '201':
+          description: Tarea creada exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+
+  /tasks/{taskId}:
+    get:
+      summary: Obtener una tarea por ID
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalle de la tarea
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Tarea no encontrada
+    put:
+      summary: Actualizar una tarea
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: Tarea actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Tarea no encontrada
+    delete:
+      summary: Eliminar una tarea
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Eliminada exitosamente
+        '404':
+          description: Tarea no encontrada
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "task_123"
+        title:
+          type: string
+          example: "Diseñar pantalla de login"
+        description:
+          type: string
+          example: "Crear taller de arquitectura limpia"
+        status:
+          type: string
+          enum: [TODO, IN_PROGRESS, DONE]
+          example: "IN_PROGRESS"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - title
+        - status
+

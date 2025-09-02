@@ -1,0 +1,2 @@
+.dialog-form { display: flex; flex-direction: column; gap: 1rem; width: 500px; max-width: 90vw; }
+.full-width { width: 100%; }

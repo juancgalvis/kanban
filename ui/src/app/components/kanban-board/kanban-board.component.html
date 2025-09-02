@@ -1,0 +1,46 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span>Kanban Dashboard</span>
+  <span class="spacer"></span>
+  <button mat-flat-button color="accent" (click)="openCreate('TODO')">
+    <mat-icon>add</mat-icon>
+    Nueva tarea
+  </button>
+</mat-toolbar>
+
+<section class="board">
+  <app-kanban-column
+    title="TODO"
+    [status]="'TODO'"
+    [tasks]="todo()"
+    [connectedTo]="['IN_PROGRESS', 'DONE']"
+    (dropped)="onDrop($event, 'TODO')"
+    (edit)="openEdit($event)"
+    (remove)="delete($event)"
+  >
+    <button mat-icon-button color="primary" (click)="openCreate('TODO')" column-actions>
+      <mat-icon>add</mat-icon>
+    </button>
+  </app-kanban-column>
+
+  <app-kanban-column
+    title="IN PROGRESS"
+    [status]="'IN_PROGRESS'"
+    [tasks]="inProgress()"
+    [connectedTo]="['TODO', 'DONE']"
+    (dropped)="onDrop($event, 'IN_PROGRESS')"
+    (edit)="openEdit($event)"
+    (remove)="delete($event)"
+  >
+  </app-kanban-column>
+
+  <app-kanban-column
+    title="DONE"
+    [status]="'DONE'"
+    [tasks]="done()"
+    [connectedTo]="['TODO', 'IN_PROGRESS']"
+    (dropped)="onDrop($event, 'DONE')"
+    (edit)="openEdit($event)"
+    (remove)="delete($event)"
+  >
+  </app-kanban-column>
+</section>
