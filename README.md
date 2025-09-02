@@ -1,5 +1,8 @@
 # Proyecto de Ejemplo de uso de Plugin de Scaffold Clean Arquitecture
 
+<img width="1066" height="509" alt="image" src="https://github.com/user-attachments/assets/c7fc49cc-4f6b-438b-9453-1511dc671df2" />
+
+
 ## Aplicación de Ejemplo
 
 Se ha definido como escenario de ejemplo un tablero kanban básico con tareas, las cuales pueden ser creadas en estado `TODO`, las cuales pueden ser movidas a estado `IN_PROGRESS` y finalmente a estado `DONE`.
